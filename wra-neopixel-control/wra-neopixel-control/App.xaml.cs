@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Maker.Firmata;
+using Microsoft.Maker.RemoteWiring;
+using Microsoft.Maker.Serial;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +25,24 @@ namespace wra_neopixel_control
     /// </summary>
     sealed partial class App : Application
     {
+        public static IStream Connection
+        {
+            get;
+            set;
+        }
+
+        public static UwpFirmata Firmata
+        {
+            get;
+            set;
+        }
+
+        public static RemoteDevice Arduino
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
