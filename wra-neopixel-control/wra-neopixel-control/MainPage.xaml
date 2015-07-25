@@ -10,5 +10,10 @@
 
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Button Name="Red" Click="Color_Click">Red</Button>
+        <Button Name="Green" Click="Color_Click">Green</Button>
+        <Button Name="Blue" Click="Color_Click">Blue</Button>
+        <Button Name="Yellow" Click="Color_Click">Yellow</Button>
+        <Button Name="Cyan" Click="Color_Click">Cyan</Button>
+        <Button Name="Magenta" Click="Color_Click">Magenta</Button>
     </StackPanel>
 </Page>

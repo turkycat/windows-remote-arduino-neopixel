@@ -24,7 +24,7 @@ namespace wra_neopixel_control
     public sealed partial class MainPage : Page
     {
         private const int NEOPIXEL_SET_COMMAND = 0x42;
-        private const int NEOPIXEL_SHOW_COMMAND = 0x43;
+        private const int NEOPIXEL_SHOW_COMMAND = 0x44;
         private const int NUMBER_OF_PIXELS = 30;
 
         private UwpFirmata firmata;
@@ -50,6 +50,18 @@ namespace wra_neopixel_control
 
                 case "Blue":
                     SetAllPixels( 0, 0, 255 );
+                    break;
+
+                case "Yellow":
+                    SetAllPixels( 255, 255, 0 );
+                    break;
+
+                case "Cyan":
+                    SetAllPixels( 0, 255, 255 );
+                    break;
+
+                case "Magenta":
+                    SetAllPixels( 255, 0, 255 );
                     break;
             }
         }
