@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maker.Firmata;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,60 @@ namespace wra_neopixel_control
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private const int NEOPIXEL_SET_COMMAND = 0x42;
+        private const int NEOPIXEL_SHOW_COMMAND = 0x43;
+        private const int NUMBER_OF_PIXELS = 30;
+
+        private UwpFirmata firmata;
+
         public MainPage()
         {
             this.InitializeComponent();
+            firmata = App.Firmata;
+        }
+
+        private void Color_Click( object sender, RoutedEventArgs e )
+        {
+            var button = sender as Button;
+            switch( button.Name )
+            {
+                case "Red":
+                    SetAllPixels( 255, 0, 0 );
+                    break;
+                
+                case "Green":
+                    SetAllPixels( 0, 255, 0 );
+                    break;
+
+                case "Blue":
+                    SetAllPixels( 0, 0, 255 );
+                    break;
+            }
+        }
+
+        private void SetAllPixels( byte red, byte green, byte blue )
+        {
+            for( byte i = 0; i < NUMBER_OF_PIXELS; ++i )
+            {
+                SetPixel( i, red, green, blue );
+            }
+            UpdateStrip();
+        }
+
+        private void SetPixel( byte pixel, byte red, byte green, byte blue )
+        {
+            firmata.beginSysex( NEOPIXEL_SET_COMMAND );
+            firmata.appendSysex( pixel );
+            firmata.appendSysex( red );
+            firmata.appendSysex( green );
+            firmata.appendSysex( blue );
+            firmata.endSysex();
+        }
+
+        private void UpdateStrip()
+        {
+            firmata.beginSysex( NEOPIXEL_SHOW_COMMAND );
+            firmata.endSysex();
         }
     }
 }
